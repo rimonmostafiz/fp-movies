@@ -1,0 +1,84 @@
+@startuml
+class Title {
+    - tconst : String
+    - primaryTitle : String
+    - originalTitle : String
+    - isAdult : boolean
+    - startYear : LocalDate
+    - endYear : LocalDate
+    - runtimeMinutes : Long
+}
+
+enum TitleType {
+    MOVIE 
+    SHORT 
+    TVSERIES 
+    TVEPISODE 
+    VIDEO
+}
+
+enum Genre {
+    Action  
+    Comedy 
+    Documentary 
+    Romance
+    Sci-Fi
+    . . . .
+    . . . .
+}
+
+class AlsoKnownAs {
+    - titleId : String
+    - ordering : Integer
+    - title : String
+    - region : String
+    - language : String
+    - String attributes : String
+    - isOriginalTitle : boolean 
+}
+
+enum Types {
+    alternative 
+    dvd
+    festival
+    imdbDisplay
+    . . . . . 
+    . . . . .
+}
+
+class Crew {
+    - tconst : String
+}
+
+class Person {
+    - nconst : String
+    - String primaryName : String
+    - birthYear : LocalDate
+    - deathYear : LocalDate
+    - primaryProfession : List<Profession>
+}
+
+enum Profession {
+    actor
+    actress
+    director
+    music_department
+    make_up_department
+    producer
+    soundtrack
+    writer
+    . . . .
+    . . . .
+}
+
+Title --> "1" TitleType
+Title --> "0..*" Genre
+Title --> "0..*" AlsoKnownAs
+Person "0..*" - "1..*" Title
+(Person, Title) .. Crew
+Person --> "0..*" Title : <known for>
+Person --> "0..*" Profession
+
+AlsoKnownAs --> "*" Types
+
+@enduml
