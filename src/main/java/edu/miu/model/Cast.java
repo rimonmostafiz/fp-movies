@@ -3,11 +3,12 @@ package edu.miu.model;
 /**
  * @author Rimon Mostafiz
  */
-public class Crew {
-    private Long creditId;
-    private Department department;
+public class Cast {
+    private Long castId;
+    private String character;
+    private String creditId;
     private Gender gender;
     private Long id;
-    private Job job;
     private String name;
+    private Integer order;
 }
