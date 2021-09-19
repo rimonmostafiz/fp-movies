@@ -10,17 +10,17 @@ class Title {
 }
 
 enum TitleType {
-    MOVIE 
-    SHORT 
-    TVSERIES 
-    TVEPISODE 
+    MOVIE
+    SHORT
+    TVSERIES
+    TVEPISODE
     VIDEO
 }
 
 enum Genre {
-    Action  
-    Comedy 
-    Documentary 
+    Action
+    Comedy
+    Documentary
     Romance
     Sci-Fi
     . . . .
@@ -34,15 +34,15 @@ class AlsoKnownAs {
     - region : String
     - language : String
     - String attributes : String
-    - isOriginalTitle : boolean 
+    - isOriginalTitle : boolean
 }
 
 enum Types {
-    alternative 
+    alternative
     dvd
     festival
     imdbDisplay
-    . . . . . 
+    . . . . .
     . . . . .
 }
 
@@ -70,15 +70,34 @@ enum Profession {
     . . . .
     . . . .
 }
+class Principals{
+   - tconst : String
+   - nconst : String
+   - category : String
+   - job : String
+   - characters : String
+}
+class Ratings{
+    - tconst : String
+    - averageRating : Double
+    - numVotes : Integer
 
-Title --> "1" TitleType
-Title --> "0..*" Genre
-Title --> "0..*" AlsoKnownAs
-Person "0..*" - "1..*" Title
-(Person, Title) .. Crew
-Person --> "0..*" Title : <known for>
-Person --> "0..*" Profession
-
-AlsoKnownAs --> "*" Types
-
+}
+class Episode{
+    - tconst : String
+    - parentTconst : List<String>
+    - seasonNumber : Integer
+    - episodeNumber : Long
+}
+Title --> TitleType
+Title "1"-->"*" Genre
+Title "1"-->"*" AlsoKnownAs
+Episode "*" --o "1" Title
+Ratings "*" --o "1" Title
+Person "1"-->"*" Profession
+AlsoKnownAs "1"-->"*" Types
+Crew "1"-->"*" Person: writer >
+Crew "1"-->"*" Person: Director >
+Title ""--"" Person
+(Title, Person) ... Principals
 @enduml
