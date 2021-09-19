@@ -1,103 +1,118 @@
 @startuml
-class Title {
-    - tconst : String
-    - primaryTitle : String
-    - originalTitle : String
-    - isAdult : boolean
-    - startYear : LocalDate
-    - endYear : LocalDate
-    - runtimeMinutes : Long
-}
 
-enum TitleType {
-    MOVIE
-    SHORT
-    TVSERIES
-    TVEPISODE
-    VIDEO
-}
+skinparam minClassWidth 50
 
-enum Genre {
-    Action
-    Comedy
-    Documentary
-    Romance
-    Sci-Fi
-    . . . .
-    . . . .
-}
-
-class AlsoKnownAs {
-    - titleId : String
-    - ordering : Integer
+class Movie {
+    - id : Long
+    - budget : Long
+    - genres : List<Genre>
+    - homepage : String
+    - keywords : List<Keyword>
+    - String originalLanguage : String
+    - String originalTitle : String
+    - String overView : String
+    - Double popularity : Double
+    - productionCompanies : List<ProductionCompany>
+    - productionCountries : List<ProductionCountry>
+    - releaseDate : LocalDate
+    - revenue : Long
+    - runtime : Integer
+    - spokenLanguages : List<SpokenLanguage>
+    - status : Status
+    - tagline : String
     - title : String
-    - region : String
-    - language : String
-    - String attributes : String
-    - isOriginalTitle : boolean
+    - voteAverage : Double
+    - voteCount : Integer
 }
 
-enum Types {
-    alternative
-    dvd
-    festival
-    imdbDisplay
-    . . . . .
-    . . . . .
+class Genre {
+    id : Long
+    name : String
+}
+
+class Keyword {
+    id : Long
+    name : String;
+}
+
+enum Gender {
+    Male(1)
+    Female(2)
+}
+
+class ProductionCompany {
+    - id : Long
+    - name : String
+}
+
+class ProductionCountry {
+    - iso : String
+    - name : String
+}
+
+class SpokenLanguage {
+    - iso : String
+    - name : String
+}
+
+enum Status {
+    Released
+}
+
+class Credit {
+    - movieId : Long
+    - title : String
+    - castList : List<Cast>
+    - crewList : List<Crew>
+}
+
+class Cast {
+    - castId : Long
+    - character : String
+    - creditId : String
+    - gender : Gender
+    - id : Long
+    - name : String
+    - order : Integer
 }
 
 class Crew {
-    - tconst : String
+    - creditId : Long;
+    - department : Department;
+    - gender : Gender;
+    - id : Long;
+    - job : Job;
+    - name : String;
 }
 
-class Person {
-    - nconst : String
-    - String primaryName : String
-    - birthYear : LocalDate
-    - deathYear : LocalDate
-    - primaryProfession : List<Profession>
-}
-
-enum Profession {
-    actor
-    actress
-    director
-    music_department
-    make_up_department
-    producer
-    soundtrack
-    writer
-    . . . .
-    . . . .
-}
-class Principals{
-   - tconst : String
-   - nconst : String
-   - category : String
-   - job : String
-   - characters : String
-}
-class Ratings{
-    - tconst : String
-    - averageRating : Double
-    - numVotes : Integer
+enum Job {
 
 }
-class Episode{
-    - tconst : String
-    - parentTconst : List<String>
-    - seasonNumber : Integer
-    - episodeNumber : Long
+
+enum Department {
+    Editing
+    Camera
+    Sound
+    Writing
+    Production
+    Art
+    Directing
+    CostumeAndMakeUp
+    Crew
 }
-Title --> TitleType
-Title "1"-->"*" Genre
-Title "1"-->"*" AlsoKnownAs
-Episode "*" --o "1" Title
-Ratings "*" --o "1" Title
-Person "1"-->"*" Profession
-AlsoKnownAs "1"-->"*" Types
-Crew "1"-->"*" Person: writer >
-Crew "1"-->"*" Person: Director >
-Title ""--"" Person
-(Title, Person) ... Principals
+
+Movie -> "1..*" Genre
+Movie -> "1..*" Keyword
+Movie -> "1..*" ProductionCompany
+Movie -> "1..*" ProductionCountry
+Movie -> "1..*" SpokenLanguage
+Movie *-- Credit
+Movie --> "1" Status
+Credit -- "*" Crew
+Credit -- "*" Cast
+Crew --> "1..*" Department
+Crew --> "1..*" Job
+Crew --> "1" Gender
+Cast --> "1" Gender
+
 @enduml

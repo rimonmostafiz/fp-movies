@@ -3,7 +3,7 @@ package edu.miu.model;
 /**
  * @author Rimon Mostafiz
  */
-public class Genre {
+public class ProductionCompany {
     private Long id;
     private String name;
 }
