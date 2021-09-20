@@ -1,6 +1,6 @@
 package edu.miu;
 
-import edu.miu.Utils.InMemoryDatabase;
+import edu.miu.utils.InMemoryDatabase;
 import edu.miu.service.FunctionalService;
 import lombok.extern.slf4j.Slf4j;
 

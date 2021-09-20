@@ -1,4 +1,4 @@
-package edu.miu.Utils;
+package edu.miu.utils;
 
 import edu.miu.model.Credit;
 import edu.miu.model.Movie;

@@ -1,4 +1,4 @@
-package edu.miu.Utils;
+package edu.miu.utils;
 
 import com.opencsv.CSVReader;
 import lombok.extern.slf4j.Slf4j;
