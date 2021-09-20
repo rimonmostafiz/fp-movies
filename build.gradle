@@ -9,10 +9,28 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+clean {
+    delete 'out', 'logs'
+}
+
 dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
-    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.6'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.3.0-alpha10'
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.3.0-alpha10'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.5.2'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0-rc2'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
