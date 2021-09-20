@@ -36,6 +36,6 @@ public interface FunctionalService {
     //Q5: top k actor appeared in leading role in a given year
     //Q6: top k movie count by country for a given year
     //Q7: movie count by language for a given year
-    //Q7: top k movie count by director for a given year
+    //Q8: top k movie count by director for a given year
 
 }
