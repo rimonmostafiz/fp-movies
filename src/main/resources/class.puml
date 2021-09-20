@@ -5,19 +5,14 @@ skinparam minClassWidth 50
 class Movie {
     - id : Long
     - budget : Long
-    - genres : List<Genre>
     - homepage : String
-    - keywords : List<Keyword>
     - String originalLanguage : String
     - String originalTitle : String
     - String overView : String
     - Double popularity : Double
-    - productionCompanies : List<ProductionCompany>
-    - productionCountries : List<ProductionCountry>
     - releaseDate : LocalDate
     - revenue : Long
     - runtime : Integer
-    - spokenLanguages : List<SpokenLanguage>
     - status : Status
     - tagline : String
     - title : String
@@ -36,6 +31,7 @@ class Keyword {
 }
 
 enum Gender {
+    OTHER(0)
     Male(1)
     Female(2)
 }
@@ -62,8 +58,6 @@ enum Status {
 class Credit {
     - movieId : Long
     - title : String
-    - castList : List<Cast>
-    - crewList : List<Crew>
 }
 
 class Cast {
@@ -77,19 +71,16 @@ class Cast {
 }
 
 class Crew {
-    - creditId : Long;
-    - department : Department;
-    - gender : Gender;
-    - id : Long;
-    - job : Job;
-    - name : String;
-}
-
-enum Job {
-
+    - creditId : String
+    - department : Department
+    - gender : Gender
+    - id : Long
+    - job : String
+    - name : String
 }
 
 enum Department {
+    Actors
     Editing
     Camera
     Sound
@@ -99,6 +90,8 @@ enum Department {
     Directing
     CostumeAndMakeUp
     Crew
+    . . . . .
+    . . . . .
 }
 
 Movie -> "1..*" Genre
@@ -111,7 +104,6 @@ Movie --> "1" Status
 Credit -- "*" Crew
 Credit -- "*" Cast
 Crew --> "1..*" Department
-Crew --> "1..*" Job
 Crew --> "1" Gender
 Cast --> "1" Gender
 

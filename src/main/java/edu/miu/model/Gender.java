@@ -1,14 +1,21 @@
 package edu.miu.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * @author Rimon Mostafiz
  */
 public enum Gender {
-    Male(1), Female(2);
+    Other(0), Male(1), Female(2);
 
-    private Integer val;
+    private Integer value;
 
     Gender(Integer v) {
-        this.val = v;
+        this.value = v;
+    }
+
+    @JsonValue
+    public Integer getValue() {
+        return value;
     }
 }
