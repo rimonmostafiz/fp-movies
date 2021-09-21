@@ -14,7 +14,7 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Total Movies: " + database.getMovies().size());
         System.out.println("Total Credits: " + database.getCredits().size());
-        System.out.println("Total Production Company: " + database.getAllProductionCompany().size());
+        //System.out.println("Total Production Company: " + database.getAllProductionCompany().size());
         //database.getAllProductionCompany().forEach(pc -> log.debug("{} {}", pc.getName(), pc.getMovieProduced().size()));
 
 //        List<String> topKMovies = FunctionalService.topKMovies.apply(database.getMovies(), 2015L, 10L);
@@ -25,5 +25,8 @@ public class Application {
 
 //        Map<String, List<String>> topKMovieByGenre = FunctionalService.topKMoviesByGenre.apply(database.getMovies(), 2015L, 3L);
 //        topKMovieByGenre.forEach((key, value) -> log.debug("{} --> {}", key, value));
+
+//        List<ImmutablePair<String, Long>> topKMovieByGenre = FunctionalService.mostSuccessfulKProductionCompany.apply(database.getMovies(), 2016L, 5L);
+//        topKMovieByGenre.forEach((pair) -> log.debug("{} --> {}", pair.getLeft(), pair.getRight()));
     }
 }
