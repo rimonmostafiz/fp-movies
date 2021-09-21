@@ -75,5 +75,12 @@ public class Movie {
 
         return movie;
     }
+    public Boolean checkGenre(String genre){
+        for (int k=0;k<genres.size();k++){
+            if(genres.get(k).getName().equals(genre))
+                return true;
+        }
+        return false;
+    }
 
 }

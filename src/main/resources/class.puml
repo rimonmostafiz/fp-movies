@@ -1,5 +1,4 @@
 @startuml
-
 skinparam minClassWidth 50
 
 class Movie {
@@ -93,10 +92,9 @@ enum Department {
     . . . . .
     . . . . .
 }
-
+ProductionCompany"*" -- "*" Movie
 Movie -> "1..*" Genre
 Movie -> "1..*" Keyword
-Movie -> "1..*" ProductionCompany
 Movie -> "1..*" ProductionCountry
 Movie -> "1..*" SpokenLanguage
 Movie *-- Credit
@@ -106,5 +104,4 @@ Credit -- "*" Cast
 Crew --> "1..*" Department
 Crew --> "1" Gender
 Cast --> "1" Gender
-
 @enduml
