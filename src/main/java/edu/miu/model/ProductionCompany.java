@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Rimon Mostafiz
  */
@@ -17,4 +20,5 @@ import lombok.ToString;
 public class ProductionCompany {
     private Long id;
     private String name;
+    private List<Movie> movieProduced = new ArrayList<>();
 }

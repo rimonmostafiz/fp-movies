@@ -1,6 +1,6 @@
 package edu.miu.utils;
 
-public class Tuple<K,V> {
+public class Tuple<K, V> {
     private K key;
     private V value;
 

@@ -1,10 +1,7 @@
 package edu.miu;
 
 import edu.miu.utils.InMemoryDatabase;
-import edu.miu.service.FunctionalService;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Map;
 
 /**
  * @author Rimon Mostafiz
@@ -17,11 +14,16 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Total Movies: " + database.getMovies().size());
         System.out.println("Total Credits: " + database.getCredits().size());
+        System.out.println("Total Production Company: " + database.getAllProductionCompany().size());
+        //database.getAllProductionCompany().forEach(pc -> log.debug("{} {}", pc.getName(), pc.getMovieProduced().size()));
 
-        Map<String, Double> topKMovies = FunctionalService.topKMovies.apply(database.getMovies(), 2015L, 10L);
-        topKMovies.forEach((key, value) -> log.debug("{} --> {}", key, value));
+//        List<String> topKMovies = FunctionalService.topKMovies.apply(database.getMovies(), 2015L, 10L);
+//        topKMovies.forEach(value -> log.debug("{}", value));
 
-        Map<String, Long> topKSuccessfulMovies = FunctionalService.topKSuccessfulMovies.apply(database.getMovies(), 2015L, 10L);
-        topKSuccessfulMovies.forEach((key, value) -> log.debug("{} --> {}", key, value));
+//        List<String> topKSuccessfulMovies = FunctionalService.topKSuccessfulMovies.apply(database.getMovies(), 2015L, 10L);
+//        topKSuccessfulMovies.forEach(value -> log.debug("{}", value));
+
+//        Map<String, List<String>> topKMovieByGenre = FunctionalService.topKMoviesByGenre.apply(database.getMovies(), 2015L, 3L);
+//        topKMovieByGenre.forEach((key, value) -> log.debug("{} --> {}", key, value));
     }
 }
