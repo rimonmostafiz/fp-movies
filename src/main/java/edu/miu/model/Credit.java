@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
  * @author Rimon Mostafiz
  */
 @Data
-@Slf4j
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +34,8 @@ public class Credit {
             credit.setCastList(Arrays.asList(mapper.readValue(row[2], Cast[].class)));
             credit.setCrewList(Arrays.asList(mapper.readValue(row[3], Crew[].class)));
         } catch (Exception ex) {
-            log.debug("Error while creating credit object ", ex);
+            System.out.println("Error while creating credit object {}");
+            ex.printStackTrace(System.out);
         }
 
         return credit;

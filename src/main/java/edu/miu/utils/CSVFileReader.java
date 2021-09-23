@@ -1,30 +1,28 @@
 package edu.miu.utils;
 
 import com.opencsv.CSVReader;
-import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Rimon Mostafiz
  */
-@Slf4j
 public class CSVFileReader {
     public static List<String[]> read(String fileName) {
         List<String[]> data = new ArrayList<>();
         try {
-            URL resource = ClassLoader.getSystemClassLoader().getResource(fileName);
+            InputStream resource = CSVFileReader.class.getResourceAsStream("/" + fileName);
             assert resource != null;
-            File file = new File(resource.toURI());
-            try (CSVReader reader = new CSVReader(new FileReader(file))) {
+            //File file = new File(resource.toURI());
+            try (CSVReader reader = new CSVReader(new InputStreamReader(resource))) {
                 reader.forEach(data::add);
             }
         } catch (Exception ex) {
-            log.debug("Something went wrong while reading file: {} {}", fileName, ex);
+            System.out.printf("Something went wrong while reading file: %s\n", fileName);
+            ex.printStackTrace(System.out);
         }
         return data;
     }

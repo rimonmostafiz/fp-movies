@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
@@ -16,7 +15,6 @@ import java.util.List;
 /**
  * @author Rimon Mostafiz
  */
-@Slf4j
 @Data
 @ToString
 @NoArgsConstructor
@@ -70,7 +68,8 @@ public class Movie {
             movie.setVoteAverage(Double.valueOf(row[18].trim()));
             movie.setVoteCount(Integer.valueOf(row[19].trim()));
         } catch (Exception ex) {
-            log.debug("Error while creating movie object ", ex);
+            System.out.println("Error while creating movie object");
+            ex.printStackTrace(System.out);
         }
 
         return movie;
