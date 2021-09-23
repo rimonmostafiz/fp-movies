@@ -23,7 +23,7 @@ public interface FunctionalService {
             movie.getStatus() == Status.Released &&
                     movie.getReleaseDate() != null && movie.getReleaseDate().getYear() == year;
 
-    //Q1. Top k high rated movies in a given year in order
+    //Q1. Top k high rated movies in a given year by order
     TriFunction<List<Movie>, Long, Long, List<String>> topKMovies = (movies, year, k) ->
             movies.stream()
                     .filter(movie -> isReleaseYearSame.test(movie, year))
@@ -36,10 +36,10 @@ public interface FunctionalService {
                     .map(entry -> String.format("%s(%s)", entry.getKey(), entry.getValue()))
                     .collect(toList());
 
-    //Q2. Top k financially successful movies by a given year in order
+    //Q2. Top k financially successful movies by a given year by order
     TriFunction<List<Movie>, Long, Long, List<String>> topKSuccessfulMovies = (movies, year, k) ->
             movies.stream()
-                    .filter(movie -> isReleaseYearSame.test(movie, k))
+                    .filter(movie -> isReleaseYearSame.test(movie, year))
                     .sorted(Comparator.comparingLong(totalBenefit::apply).reversed())
                     .limit(k)
                     .collect(toMap(Movie::getTitle, totalBenefit))
@@ -49,7 +49,7 @@ public interface FunctionalService {
                     .map(entry -> String.format("%s -> %s", entry.getKey(), entry.getValue()))
                     .collect(toList());
 
-    //Q3: K top rated movies in each genre in a given year
+    //Q3: K top rated movies of each genre in a given year
     BiFunction<Movie, List<Genre>, List<ImmutablePair<Genre, Movie>>> movieGenrePairGenerator = (movie, genres) ->
             genres.stream()
                     .map(genre -> ImmutablePair.of(genre, movie))
@@ -81,7 +81,7 @@ public interface FunctionalService {
                     .map(entry -> ImmutablePair.of(entry.getKey(), sortListOfMovieByAverageRating.apply(ImmutablePair.of(entry.getKey(), entry.getValue()), k)))
                     .collect(toMap(ImmutablePair::getLeft, ip -> convertListOfMoviesToPairOfNameAndRating.apply(ip.getRight())));
 
-    //Q4: K Most successful production company for a given year
+    //Q4: K most successful production company in a given year
     Function<List<Movie>, Long> totalRevenue = movies -> movies.stream()
             .map(Movie::getRevenue)
             .reduce(0L, Long::sum);
@@ -107,7 +107,7 @@ public interface FunctionalService {
                     .limit(k)
                     .collect(toList());
 
-    //Q5. Most popular movie in each genre in a given year
+    //Q5. Most popular movie of each genre in a given year
     Function<List<Movie>, Optional<Movie>> mostPopularMovie = movies ->
             movies.stream()
                     .max((m1, m2) -> Double.compare(m2.getPopularity(), m1.getPopularity()));
@@ -151,9 +151,9 @@ public interface FunctionalService {
                     .map(entry -> ImmutablePair.of(entry.getKey(), entry.getValue()))
                     .collect(Collectors.toList());
 
-    //Q6: top k genre by a given year
-    //Q7: top k actor appeared in leading role in a given year
-    //Q8: top k movie count by country for a given year
-
+    //Q7: top k genre by a given year
+    //Q8: top k actor appeared in leading role in a given year
+    //Q9: top k movie count by country for a given year
     //Q10: top k movie count by director for a given year
+    //Q11: in a given year how many movies were released by given content rating
 }
