@@ -110,9 +110,9 @@ public interface FunctionalService {
     //Q5. Most popular movie of each genre in a given year
     Function<List<Movie>, Optional<Movie>> mostPopularMovie = movies ->
             movies.stream()
-                    .max((m1, m2) -> Double.compare(m2.getPopularity(), m1.getPopularity()));
+                    .max(Comparator.comparingDouble(Movie::getPopularity));
 
-    TriFunction<List<Movie>, Long, Long, List<String>> kMostPopularMovieInAGivenYear = (movies, year, k) ->
+    BiFunction<List<Movie>, Long, List<String>> kMostPopularMovieInAGivenYear = (movies, year) ->
             movies.stream()
                     .filter(movie -> isReleaseYearSame.test(movie, year))
                     .collect(toMap(Function.identity(), Movie::getGenres))
@@ -141,7 +141,7 @@ public interface FunctionalService {
                     .stream()
                     .map(entry -> movieSpokenLanguagePairGenerator.apply(entry.getKey(), entry.getValue()))
                     .flatMap(Collection::stream)
-                    .collect(groupingBy(entry -> entry.getLeft().getName(), Collectors.mapping(ImmutablePair::getRight, toList())))
+                    .collect(groupingBy(entry -> entry.getLeft().getIso(), Collectors.mapping(ImmutablePair::getRight, toList())))
                     .entrySet()
                     .stream()
                     .collect(toMap(Map.Entry::getKey, entry -> entry.getValue().size()))
