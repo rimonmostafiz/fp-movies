@@ -31,7 +31,7 @@ public interface FunctionalService {
     //Q1. Top k movies(average rating) in a given year in order
     TriFunction<List<Movie>, Long, Long, List<String>> topKMovies = (movies, year, k) ->
             movies.stream()
-                    .filter(movie -> isReleaseYearSame.test(movie, k))
+                    .filter(movie -> isReleaseYearSame.test(movie, year))
                     .sorted(Comparator.comparingDouble(Movie::getVoteAverage).reversed())
                     .limit(k)
                     .collect(toMap(Movie::getTitle, Movie::getVoteAverage))
@@ -45,7 +45,7 @@ public interface FunctionalService {
     //Q2. Top k financially successful movies by a given year in order
     TriFunction<List<Movie>, Long, Long, List<String>> topKSuccessfulMovies = (movies, year, k) ->
             movies.stream()
-                    .filter(movie -> isReleaseYearSame.test(movie, k))
+                    .filter(movie -> isReleaseYearSame.test(movie, year))
                     .sorted(Comparator.comparingLong(totalBenefit::apply).reversed())
                     .limit(k)
                     .collect(toMap(Movie::getTitle, totalBenefit))
